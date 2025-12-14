@@ -1,47 +1,39 @@
 import { toGregorian, toHijri } from "hijri-converter";
 
-// Hijri month names in English and Arabic
+// Hijri month names
 export const HIJRI_MONTHS = [
-  { value: "1", english: "Muharram", arabic: "محرم" },
-  { value: "2", english: "Safar", arabic: "صفر" },
-  { value: "3", english: "Rabi' al-Awwal", arabic: "ربيع الأول" },
-  { value: "4", english: "Rabi' al-Thani", arabic: "ربيع الثاني" },
-  { value: "5", english: "Jumada al-Awwal", arabic: "جمادى الأولى" },
-  { value: "6", english: "Jumada al-Thani", arabic: "جمادى الثانية" },
-  { value: "7", english: "Rajab", arabic: "رجب" },
-  { value: "8", english: "Sha'ban", arabic: "شعبان" },
-  { value: "9", english: "Ramadan", arabic: "رمضان" },
-  { value: "10", english: "Shawwal", arabic: "شوال" },
-  { value: "11", english: "Dhu al-Qi'dah", arabic: "ذو القعدة" },
-  { value: "12", english: "Dhu al-Hijjah", arabic: "ذو الحجة" },
+  { value: "1", name: "Muharram" },
+  { value: "2", name: "Safar" },
+  { value: "3", name: "Rabi al-Awwal" },
+  { value: "4", name: "Rabi al-Thani" },
+  { value: "5", name: "Jumada al-Awwal" },
+  { value: "6", name: "Jumada al-Thani" },
+  { value: "7", name: "Rajab" },
+  { value: "8", name: "Shaban" },
+  { value: "9", name: "Ramadan" },
+  { value: "10", name: "Shawwal" },
+  { value: "11", name: "Dhu al-Qidah" },
+  { value: "12", name: "Dhu al-Hijjah" },
 ];
 
 // Gregorian month names
 export const GREGORIAN_MONTHS = [
-  { value: "1", english: "January" },
-  { value: "2", english: "February" },
-  { value: "3", english: "March" },
-  { value: "4", english: "April" },
-  { value: "5", english: "May" },
-  { value: "6", english: "June" },
-  { value: "7", english: "July" },
-  { value: "8", english: "August" },
-  { value: "9", english: "September" },
-  { value: "10", english: "October" },
-  { value: "11", english: "November" },
-  { value: "12", english: "December" },
+  { value: "1", name: "January" },
+  { value: "2", name: "February" },
+  { value: "3", name: "March" },
+  { value: "4", name: "April" },
+  { value: "5", name: "May" },
+  { value: "6", name: "June" },
+  { value: "7", name: "July" },
+  { value: "8", name: "August" },
+  { value: "9", name: "September" },
+  { value: "10", name: "October" },
+  { value: "11", name: "November" },
+  { value: "12", name: "December" },
 ];
 
 // Day names
-export const DAY_NAMES = [
-  { english: "Sunday", arabic: "الأحد" },
-  { english: "Monday", arabic: "الاثنين" },
-  { english: "Tuesday", arabic: "الثلاثاء" },
-  { english: "Wednesday", arabic: "الأربعاء" },
-  { english: "Thursday", arabic: "الخميس" },
-  { english: "Friday", arabic: "الجمعة" },
-  { english: "Saturday", arabic: "السبت" },
-];
+export const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export interface HijriDate {
   year: number;
@@ -76,10 +68,9 @@ export function convertGregorianToHijri(gregorian: GregorianDate): HijriDate {
 }
 
 // Get formatted Hijri date string
-export function formatHijriDate(hijri: HijriDate, includeArabic = true): string {
+export function formatHijriDate(hijri: HijriDate): string {
   const month = HIJRI_MONTHS[hijri.month - 1];
-  const arabicSuffix = includeArabic ? ` (${month.arabic})` : "";
-  return `${hijri.day} ${month.english}${arabicSuffix} ${hijri.year} AH`;
+  return `${hijri.day} ${month.name} ${hijri.year} AH`;
 }
 
 // Get formatted Gregorian date string
@@ -149,13 +140,13 @@ export function isValidHijriYear(year: number): boolean {
 }
 
 // Get day name for a date
-export function getDayName(gregorian: GregorianDate): { english: string; arabic: string } {
+export function getDayName(gregorian: GregorianDate): string {
   const date = new Date(gregorian.year, gregorian.month - 1, gregorian.day);
   const dayIndex = date.getDay();
   return DAY_NAMES[dayIndex];
 }
 
 // Get Hijri month name
-export function getHijriMonthName(month: number): { english: string; arabic: string } {
-  return HIJRI_MONTHS[month - 1];
+export function getHijriMonthName(month: number): string {
+  return HIJRI_MONTHS[month - 1].name;
 }

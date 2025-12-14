@@ -8,8 +8,8 @@ import {
   GREGORIAN_MONTHS,
 } from "./utils";
 
-function getNextDays(count: number): Array<{ hijri: HijriDate; dayName: { english: string; arabic: string } }> {
-  const days: Array<{ hijri: HijriDate; dayName: { english: string; arabic: string } }> = [];
+function getNextDays(count: number): Array<{ hijri: HijriDate; dayName: string }> {
+  const days: Array<{ hijri: HijriDate; dayName: string }> = [];
   const today = getTodayHijri();
 
   for (let i = 0; i < count; i++) {
@@ -51,17 +51,17 @@ export default function Command() {
         const gregorianMonth = GREGORIAN_MONTHS[gregorian.month - 1];
 
         const isToday = index === 0;
-        const hijriStr = `${hijri.day} ${hijriMonth.english}`;
-        const gregorianStr = `${gregorian.day} ${gregorianMonth.english}`;
-        const copyText = `${hijri.day} ${hijriMonth.english} ${hijri.year} (${gregorian.day} ${gregorianMonth.english} ${gregorian.year})`;
+        const hijriStr = `${hijri.day} ${hijriMonth}`;
+        const gregorianStr = `${gregorian.day} ${gregorianMonth.name}`;
+        const copyText = `${hijri.day} ${hijriMonth} ${hijri.year} (${gregorian.day} ${gregorianMonth.name} ${gregorian.year})`;
 
         return (
           <List.Item
             key={index}
             icon={isToday ? Icon.Star : Icon.Calendar}
-            title={`${dayName.english.substring(0, 3)} ${hijriStr}`}
-            subtitle={hijriMonth.arabic}
-            accessories={[{ text: gregorianStr }, { text: dayName.arabic }]}
+            title={`${dayName.substring(0, 3)} ${hijriStr}`}
+            subtitle={`${hijri.year} AH`}
+            accessories={[{ text: gregorianStr }]}
             actions={
               <ActionPanel>
                 <Action
@@ -69,7 +69,7 @@ export default function Command() {
                   icon={Icon.Clipboard}
                   onAction={async () => {
                     await Clipboard.copy(copyText);
-                    await showHUD(`📅 ${copyText} (copied!)`);
+                    await showHUD(`${copyText} (copied!)`);
                   }}
                 />
               </ActionPanel>

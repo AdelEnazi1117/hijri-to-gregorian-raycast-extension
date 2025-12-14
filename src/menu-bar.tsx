@@ -22,11 +22,11 @@ export default function Command() {
   const dayName = getDayName(gregorian);
   const hijriMonth = getHijriMonthName(hijri.month);
 
-  const hijriWithArabic = formatHijriDate(hijri);
+  const hijriFormatted = formatHijriDate(hijri);
   const gregorianFormatted = formatGregorianDate(gregorian, false);
 
   // Menu bar shows short Hijri date
-  const menuBarTitle = `${hijri.day} ${hijriMonth.english.substring(0, 3)} ${hijri.year}`;
+  const menuBarTitle = `${hijri.day} ${hijriMonth.substring(0, 3)} ${hijri.year}`;
 
   async function copyText(text: string, message: string) {
     await Clipboard.copy(text);
@@ -35,15 +35,15 @@ export default function Command() {
 
   return (
     <MenuBarExtra icon={Icon.Calendar} title={menuBarTitle} tooltip="Hijri Date">
-      <MenuBarExtra.Section title="🌙 Today's Hijri Date">
+      <MenuBarExtra.Section title="Today's Hijri Date">
         <MenuBarExtra.Item
-          title={hijriWithArabic}
+          title={hijriFormatted}
           icon={Icon.Calendar}
-          onAction={() => copyText(hijriWithArabic, "Hijri date copied!")}
+          onAction={() => copyText(hijriFormatted, "Hijri date copied!")}
         />
       </MenuBarExtra.Section>
 
-      <MenuBarExtra.Section title="📅 Gregorian Date">
+      <MenuBarExtra.Section title="Gregorian Date">
         <MenuBarExtra.Item
           title={gregorianFormatted}
           icon={Icon.Calendar}
@@ -51,11 +51,11 @@ export default function Command() {
         />
       </MenuBarExtra.Section>
 
-      <MenuBarExtra.Section title={`📆 ${dayName.english}`}>
+      <MenuBarExtra.Section title={dayName}>
         <MenuBarExtra.Item
-          title={dayName.arabic}
+          title="Copy Day Name"
           icon={Icon.Clock}
-          onAction={() => copyText(`${dayName.english} (${dayName.arabic})`, "Day name copied!")}
+          onAction={() => copyText(dayName, "Day name copied!")}
         />
       </MenuBarExtra.Section>
 
@@ -64,7 +64,7 @@ export default function Command() {
           title="Copy Both Dates"
           icon={Icon.Clipboard}
           shortcut={{ modifiers: ["cmd"], key: "c" }}
-          onAction={() => copyText(`${hijriWithArabic}\n${gregorianFormatted}`, "Both dates copied!")}
+          onAction={() => copyText(`${hijriFormatted}\n${gregorianFormatted}`, "Both dates copied!")}
         />
         <MenuBarExtra.Item
           title="Hijri Calendar"
@@ -73,13 +73,13 @@ export default function Command() {
           onAction={() => launchCommand({ name: "hijri-calendar", type: LaunchType.UserInitiated })}
         />
         <MenuBarExtra.Item
-          title="Convert Hijri → Gregorian"
+          title="Convert Hijri to Gregorian"
           icon={Icon.ArrowRight}
           shortcut={{ modifiers: ["cmd"], key: "1" }}
           onAction={() => launchCommand({ name: "convert-date", type: LaunchType.UserInitiated })}
         />
         <MenuBarExtra.Item
-          title="Convert Gregorian → Hijri"
+          title="Convert Gregorian to Hijri"
           icon={Icon.ArrowLeft}
           shortcut={{ modifiers: ["cmd"], key: "2" }}
           onAction={() => launchCommand({ name: "gregorian-to-hijri", type: LaunchType.UserInitiated })}

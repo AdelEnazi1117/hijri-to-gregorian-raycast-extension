@@ -33,7 +33,7 @@ export default function Command() {
         const hijri = convertGregorianToHijri(gregorian);
         const dayInfo = getDayName(gregorian);
         setPreview(formatHijriDate(hijri));
-        setDayName(`${dayInfo.english} (${dayInfo.arabic})`);
+        setDayName(dayInfo);
       } catch {
         setPreview("");
         setDayName("");
@@ -63,7 +63,7 @@ export default function Command() {
       await Clipboard.copy(result);
 
       // Show HUD and close
-      await showHUD(`🌙 ${result} (copied!)`);
+      await showHUD(`${result} (copied!)`);
       await popToRoot();
     } catch {
       await showToast({ style: Toast.Style.Failure, title: "Conversion Error" });
@@ -82,7 +82,7 @@ export default function Command() {
 
       <Form.Dropdown id="month" title="Month" value={month} onChange={setMonth}>
         {GREGORIAN_MONTHS.map((m) => (
-          <Form.Dropdown.Item key={m.value} value={m.value} title={m.english} keywords={[m.value]} />
+          <Form.Dropdown.Item key={m.value} value={m.value} title={m.name} keywords={[m.value]} />
         ))}
       </Form.Dropdown>
 
@@ -91,8 +91,8 @@ export default function Command() {
       {preview && (
         <>
           <Form.Separator />
-          <Form.Description title="🌙 Result" text={preview} />
-          <Form.Description title="📆 Day" text={dayName} />
+          <Form.Description title="Result" text={preview} />
+          <Form.Description title="Day" text={dayName} />
         </>
       )}
     </Form>

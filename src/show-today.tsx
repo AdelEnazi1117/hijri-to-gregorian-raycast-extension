@@ -20,22 +20,21 @@ export default function Command() {
   const gregorianFormatted = formatGregorianDate(gregorian, false);
 
   const markdown = `
-# ${dayName.english} ${dayName.arabic}
+# ${dayName}
 
 ---
 
-| 🌙 Hijri | 📅 Gregorian |
+| Hijri | Gregorian |
 |:---:|:---:|
 | **${hijri.day}** | **${gregorian.day}** |
-| ${hijriMonth.english} | ${gregorianMonth.english} |
-| ${hijriMonth.arabic} | ${gregorian.year} |
-| ${hijri.year} AH | |
+| ${hijriMonth} | ${gregorianMonth.name} |
+| ${hijri.year} AH | ${gregorian.year} |
 
 ---
 
 ## Quick Copy
 
-Press **⌘ + H** for Hijri · **⌘ + G** for Gregorian · **⌘ + C** for Both
+Press **Cmd + H** for Hijri | **Cmd + G** for Gregorian | **Cmd + C** for Both
 `;
 
   async function copyAndClose(text: string, message: string) {
@@ -53,13 +52,13 @@ Press **⌘ + H** for Hijri · **⌘ + G** for Gregorian · **⌘ + C** for Both
             title="Copy Hijri Date"
             icon={Icon.Clipboard}
             shortcut={{ modifiers: ["cmd"], key: "h" }}
-            onAction={() => copyAndClose(hijriFormatted, `🌙 ${hijriFormatted} (copied!)`)}
+            onAction={() => copyAndClose(hijriFormatted, `${hijriFormatted} (copied!)`)}
           />
           <Action
             title="Copy Gregorian Date"
             icon={Icon.Clipboard}
             shortcut={{ modifiers: ["cmd"], key: "g" }}
-            onAction={() => copyAndClose(gregorianFormatted, `📅 ${gregorianFormatted} (copied!)`)}
+            onAction={() => copyAndClose(gregorianFormatted, `${gregorianFormatted} (copied!)`)}
           />
           <Action
             title="Copy Both Dates"
@@ -71,13 +70,11 @@ Press **⌘ + H** for Hijri · **⌘ + G** for Gregorian · **⌘ + C** for Both
       }
       metadata={
         <Detail.Metadata>
-          <Detail.Metadata.Label title="🌙 Hijri" text={`${hijri.day} ${hijriMonth.english} ${hijri.year}`} />
-          <Detail.Metadata.Label title="" text={hijriMonth.arabic} />
+          <Detail.Metadata.Label title="Hijri" text={`${hijri.day} ${hijriMonth} ${hijri.year}`} />
           <Detail.Metadata.Separator />
-          <Detail.Metadata.Label title="📅 Gregorian" text={gregorianFormatted} />
+          <Detail.Metadata.Label title="Gregorian" text={gregorianFormatted} />
           <Detail.Metadata.Separator />
-          <Detail.Metadata.Label title="📆 Day" text={dayName.english} />
-          <Detail.Metadata.Label title="" text={dayName.arabic} />
+          <Detail.Metadata.Label title="Day" text={dayName} />
         </Detail.Metadata>
       }
     />
