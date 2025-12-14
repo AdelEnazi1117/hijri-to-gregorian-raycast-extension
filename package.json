@@ -1,47 +1,45 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "hijri-to-gregorian",
+  "name": "hijri-converter",
   "title": "Hijri Converter",
-  "description": "Convert dates between Hijri (Islamic) and Gregorian calendars. Features bidirectional conversion, today's date view, and MenuBar quick access with Arabic support.",
+  "description": "Convert dates between Hijri (Islamic) and Gregorian calendars with live preview, calendar view, and menu bar access.",
   "icon": "extension-icon.png",
   "author": "adel_enazi",
   "platforms": [
-    "macOS",
-    "Windows"
+    "macOS"
   ],
   "categories": [
-    "Productivity",
-    "Other"
+    "Productivity"
   ],
   "license": "MIT",
   "commands": [
     {
       "name": "convert-date",
-      "title": "Hijri → Gregorian",
-      "description": "Convert Hijri date to Gregorian with live preview",
+      "title": "Convert Hijri to Gregorian",
+      "description": "Convert a Hijri date to Gregorian with live preview",
       "mode": "view"
     },
     {
       "name": "gregorian-to-hijri",
-      "title": "Gregorian → Hijri",
-      "description": "Convert Gregorian date to Hijri with live preview",
+      "title": "Convert Gregorian to Hijri",
+      "description": "Convert a Gregorian date to Hijri with live preview",
       "mode": "view"
     },
     {
       "name": "show-today",
-      "title": "Today's Date",
-      "description": "Display today's date in both calendars",
+      "title": "Show Today's Date",
+      "description": "Display today's date in both Hijri and Gregorian calendars",
       "mode": "view"
     },
     {
       "name": "menu-bar",
-      "title": "Hijri Menu Bar",
-      "description": "Always-visible Hijri date in menu bar",
+      "title": "Show Hijri Date in Menu Bar",
+      "description": "Display the current Hijri date in the menu bar",
       "mode": "menu-bar"
     },
     {
       "name": "hijri-calendar",
-      "title": "Hijri Calendar",
+      "title": "View Hijri Calendar",
       "description": "View upcoming days in the Hijri calendar",
       "mode": "view"
     }
