@@ -4,6 +4,8 @@ import {
   getTodayGregorian,
   formatHijriDate,
   formatGregorianDate,
+  formatGregorianDateShort,
+  formatHijriDateShort,
   getDayName,
   getHijriMonthName,
   GREGORIAN_MONTHS,
@@ -18,6 +20,8 @@ export default function Command() {
 
   const hijriFormatted = formatHijriDate(hijri);
   const gregorianFormatted = formatGregorianDate(gregorian, false);
+  const hijriShort = formatHijriDateShort(hijri);
+  const gregorianShort = formatGregorianDateShort(gregorian);
 
   const markdown = `
 # ${dayName}
@@ -29,6 +33,11 @@ export default function Command() {
 | **${hijri.day}** | **${gregorian.day}** |
 | ${hijriMonth} | ${gregorianMonth.name} |
 | ${hijri.year} AH | ${gregorian.year} |
+
+---
+
+**Hijri (short):** ${hijriShort}  
+**Gregorian (ISO):** ${gregorianShort}
 
 ---
 
@@ -73,6 +82,8 @@ Press **Cmd + H** for Hijri | **Cmd + G** for Gregorian | **Cmd + C** for Both
           <Detail.Metadata.Label title="Hijri" text={`${hijri.day} ${hijriMonth} ${hijri.year}`} />
           <Detail.Metadata.Separator />
           <Detail.Metadata.Label title="Gregorian" text={gregorianFormatted} />
+          <Detail.Metadata.Separator />
+          <Detail.Metadata.Label title="Gregorian (ISO)" text={gregorianShort} />
           <Detail.Metadata.Separator />
           <Detail.Metadata.Label title="Day" text={dayName} />
         </Detail.Metadata>
