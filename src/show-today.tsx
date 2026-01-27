@@ -36,14 +36,8 @@ export default function Command() {
 
 ---
 
-**Hijri (short):** ${hijriShort}  
-**Gregorian (ISO):** ${gregorianShort}
-
----
-
-## Quick Copy
-
-Press **Cmd + H** for Hijri | **Cmd + G** for Gregorian | **Cmd + C** for Both
+**Hijri:** ${hijriShort}  
+**Gregorian:** ${gregorianShort}
 `;
 
   async function copyAndClose(text: string, message: string) {
@@ -82,8 +76,6 @@ Press **Cmd + H** for Hijri | **Cmd + G** for Gregorian | **Cmd + C** for Both
           <Detail.Metadata.Label title="Hijri" text={`${hijri.day} ${hijriMonth} ${hijri.year}`} />
           <Detail.Metadata.Separator />
           <Detail.Metadata.Label title="Gregorian" text={gregorianFormatted} />
-          <Detail.Metadata.Separator />
-          <Detail.Metadata.Label title="Gregorian (ISO)" text={gregorianShort} />
           <Detail.Metadata.Separator />
           <Detail.Metadata.Label title="Day" text={dayName} />
         </Detail.Metadata>
